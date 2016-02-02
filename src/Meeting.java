@@ -3,10 +3,11 @@ import java.util.Set;
 
 /**
  * A class to represent meetings
- *
+ * <p/>
  * Meetings have unique IDs, scheduled date and a list of participating contacts
  */
 public interface Meeting {
+
     /**
      * Returns the id of the meeting.
      *
@@ -22,9 +23,11 @@ public interface Meeting {
     Calendar getDate();
 
     /**
-     * Return the details of people that attended the meeting. *
+     * Return the details of people that attended the meeting.
+     * <p/>
      * The list contains a minimum of one contact (if there were
-     * just two people: the user and the contact) and may contain an * arbitrary number of them.
+     * just two people: the user and the contact) and may contain an
+     * arbitraty number of them.
      *
      * @return the details of people that attended the meeting.
      */
