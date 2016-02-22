@@ -117,13 +117,14 @@ public interface ContactManager {
     void addMeetingNotes(int id, String text);
 
     /**
-     * Create a new contact with the specified name and notes.
-     *
-     * @param name  the name of the contact.
+     * Create a new contact with the specified name and notes. *
+     * @param name the name of the contact.
      * @param notes notes to be added about the contact.
+     * @return the ID for the new contact
+     * @throws IllegalArgumentException if the name or the notes are empty strings
      * @throws NullPointerException if the name or the notes are null
      */
-    void addNewContact(String name, String notes);
+    int addNewContact(String name, String notes);
 
     /**
      * Returns a list containing the contacts that correspond to the IDs.
