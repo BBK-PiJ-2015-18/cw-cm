@@ -11,8 +11,8 @@ public class ContactImpl implements Contact {
     private String notes;
 
     public ContactImpl(int id, String name, String notes) {
-        validateId(id);
-        validateNotNull(id, name, notes);
+        ValidationHelpers.validateId(id);
+        ValidationHelpers.validateNotNull(id, name, notes);
 
         this.id = id;
         this.name = name;
@@ -20,26 +20,12 @@ public class ContactImpl implements Contact {
     }
 
     public ContactImpl(int id, String name) {
-        validateId(id);
-        validateNotNull(id, name);
+        ValidationHelpers.validateId(id);
+        ValidationHelpers.validateNotNull(id, name);
 
         this.id = id;
         this.name = name;
         this.notes = null;
-    }
-
-    private void validateId(int id) {
-        if(id <= 0) {
-            throw new IllegalArgumentException("Id is 0 or negative");
-        }
-    }
-
-    private void validateNotNull(Object... params) {
-        for (Object item : params) {
-            if(item == null) {
-                throw new NullPointerException();
-            }
-        }
     }
 
     @Override
