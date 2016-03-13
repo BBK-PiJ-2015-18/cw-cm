@@ -4,6 +4,7 @@ import interfaces.*;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class ContactManagerImpl implements ContactManager {
     private final String fileName = "contacts.xml";
@@ -17,8 +18,8 @@ public class ContactManagerImpl implements ContactManager {
     private int contactIndex = 0;
 
     public ContactManagerImpl() {
-        meetings = new ArrayList<Meeting>();
-        contacts = new ArrayList<Contact>();
+        meetings = new ArrayList<>();
+        contacts = new ArrayList<>();
     }
 
     private enum EntityType {
@@ -86,8 +87,13 @@ public class ContactManagerImpl implements ContactManager {
 
     @Override
     public void addNewPastMeeting(Set<Contact> contacts, Calendar date, String text) {
-        int newId = 1001;
-        PastMeeting pastMeeting = new PastMeetingImpl(newId, date, contacts, text);
+        ValidationHelpers.validateHasItem(contacts);
+        ValidationHelpers.validateBeforeToday(date);
+        ValidationHelpers.validateContainsAll(this.contacts, contacts);
+
+        int id = generateId(EntityType.Meeting);
+        PastMeeting pastMeeting = new PastMeetingImpl(id, date, contacts, text);
+        this.meetings.add(pastMeeting);
     }
 
     @Override
@@ -97,19 +103,22 @@ public class ContactManagerImpl implements ContactManager {
 
     @Override
     public int addNewContact(String name, String notes) {
-        int newId = 1001;
-        Contact contact = new ContactImpl(newId, name, notes);
-        return 0;
+        ValidationHelpers.validateNotNull(name, notes);
+
+        int id = generateId(EntityType.Contact);
+        Contact contact = new ContactImpl(id, name, notes);
+        this.contacts.add(contact);
+        return id;
     }
 
     @Override
     public Set<Contact> getContacts(int... ids) {
-        return null;
+        return contacts.stream().filter(contact -> IntStream.of(ids).anyMatch(x -> x == contact.getId())).collect(Collectors.toSet());
     }
 
     @Override
     public Set<Contact> getContacts(String name) {
-        return null;
+        return contacts.stream().filter(contact -> contact.getName().equals(name)).collect(Collectors.toSet());
     }
 
     @Override
