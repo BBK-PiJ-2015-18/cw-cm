@@ -20,4 +20,9 @@ public class PastMeetingImpl extends MeetingImpl implements PastMeeting {
     public String getNotes() {
         return notes;
     }
+
+    @Override
+    public void addNotes(String note) {
+        notes += note;
+    }
 }

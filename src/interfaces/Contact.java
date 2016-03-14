@@ -1,12 +1,14 @@
 package interfaces;
 
+import java.io.Serializable;
+
 /**
  * A contact is a person we are making business with or may do in the future.
  * <p/>
  * Contacts have an ID (unique), a name (probably unique, but maybe
  * not), and notes that the user may want to save about them.
  */
-public interface Contact {
+public interface Contact extends Serializable {
 
     /**
      * Returns the ID of the contact.

@@ -14,4 +14,9 @@ public interface PastMeeting extends Meeting {
      * @return the notes from the meeting.
      */
     String getNotes();
+
+    /**
+     * Add notes about the contact. *
+     * @param note the notes to be added */
+    void addNotes(String note);
 }

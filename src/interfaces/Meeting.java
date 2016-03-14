@@ -1,5 +1,6 @@
 package interfaces;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Set;
 
@@ -8,7 +9,7 @@ import java.util.Set;
  * <p/>
  * Meetings have unique IDs, scheduled date and a list of participating contacts
  */
-public interface Meeting {
+public interface Meeting extends Serializable {
 
     /**
      * Returns the id of the meeting.
